@@ -1,5 +1,13 @@
-import { generatePhotos } from './data.js';
+import './photo-gallery.js';
+import './upload-form.js';
+import './image-editor.js';
+import { initializeGallery } from './photo-gallery.js';
+import './gallery-filters.js';
+import './image-uploader.js';
 
-const PHOTOS_COUNT = 25;
+const filterPanel = document.querySelector('.img-filters');
 
-generatePhotos(PHOTOS_COUNT);
+initializeGallery().then(() => {
+  filterPanel.classList.remove('img-filters--inactive');
+});
+
