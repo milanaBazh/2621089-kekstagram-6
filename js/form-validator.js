@@ -53,7 +53,7 @@ const generateHashtagError = (inputValue) => {
     return 'Некорректный формат хэштега';
   }
 
-  return 'Ошибка в хэштегах';
+  return 'Ошибка в хэштегач';
 };
 
 validationEngine.addValidator(
