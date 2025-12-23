@@ -11,6 +11,15 @@ const selectRandomElement = (array) => array[generateRandomInteger(0, array.leng
 
 const isEscPressed = (keyboardEvent) => keyboardEvent.key === 'Escape';
 
+// Объявляем функцию перед использованием
+const createEscHandler = (closeFunction) => {
+  return function handleEscClose(event) {
+    if (isEscPressed(event)) {
+      closeFunction();
+    }
+  };
+};
+
 const displayStatusMessage = ({ templateSelector, popupClass, closeButtonClass }) => {
   const messageElement = document
     .querySelector(templateSelector)
@@ -25,11 +34,8 @@ const displayStatusMessage = ({ templateSelector, popupClass, closeButtonClass }
     document.removeEventListener('keydown', handleEscClose);
   };
 
-  const handleEscClose = function(event) {
-    if (isEscPressed(event)) {
-      closeMessage();
-    }
-  };
+  // Используем заранее объявленную функцию
+  const handleEscClose = createEscHandler(closeMessage);
 
   messageElement.querySelector(closeButtonClass).addEventListener('click', closeMessage);
 
@@ -94,4 +100,4 @@ function debounceFunction (callbackFunction, delayTime = DEBOUNCE_INTERVAL) {
   };
 }
 
-export{generateRandomInteger, selectRandomElement, showAlertMessage, debounceFunction, displayStatusMessage, openModalWindow, isEscPressed};
+export { generateRandomInteger, selectRandomElement, showAlertMessage, debounceFunction, displayStatusMessage, openModalWindow, isEscPressed };
