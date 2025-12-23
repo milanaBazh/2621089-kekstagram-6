@@ -20,16 +20,16 @@ const displayStatusMessage = ({ templateSelector, popupClass, closeButtonClass }
 
   document.body.append(messageElement);
 
-  const closeMessage = () => {
-    messageElement.remove();
-    document.removeEventListener('keydown', handleEscClose);
-  };
-
-  // Объявляем функцию перед её использованием
-  const handleEscClose = function(event) {
+  // Объявляем функцию в начале
+  const handleEscClose = (event) => {
     if (isEscPressed(event)) {
       closeMessage();
     }
+  };
+
+  const closeMessage = () => {
+    messageElement.remove();
+    document.removeEventListener('keydown', handleEscClose);
   };
 
   messageElement.querySelector(closeButtonClass).addEventListener('click', closeMessage);
