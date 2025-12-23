@@ -20,17 +20,17 @@ const displayStatusMessage = ({ templateSelector, popupClass, closeButtonClass }
 
   document.body.append(messageElement);
 
-  // Объявляем функцию в начале
-  const handleEscClose = (event) => {
+  // Используем объявление функции (function declaration) - она всплывает
+  function closeMessage() {
+    messageElement.remove();
+    document.removeEventListener('keydown', onEscKey);
+  }
+
+  function onEscKey(event) {
     if (isEscPressed(event)) {
       closeMessage();
     }
-  };
-
-  const closeMessage = () => {
-    messageElement.remove();
-    document.removeEventListener('keydown', handleEscClose);
-  };
+  }
 
   messageElement.querySelector(closeButtonClass).addEventListener('click', closeMessage);
 
@@ -40,7 +40,7 @@ const displayStatusMessage = ({ templateSelector, popupClass, closeButtonClass }
     }
   });
 
-  document.addEventListener('keydown', handleEscClose);
+  document.addEventListener('keydown', onEscKey);
 };
 
 const openModalWindow = (modalContainer, onCloseAction) => {
